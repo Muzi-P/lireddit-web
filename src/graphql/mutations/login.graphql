@@ -5,9 +5,7 @@ mutation Login($options: UserNamePasswordInput!) {
       message
     }
     user {
-      id
-      username
-      updated_at
+      ...RegularUser
     }
   }
 }
