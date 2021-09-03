@@ -6,9 +6,11 @@ import { InputField } from '../components/InputField';
 import { useLoginMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
 import { useRouter } from 'next/dist/client/router';
+import { createUrqlClient } from '../utils/createUrqlClient';
+import { withUrqlClient } from 'next-urql';
 interface registerProps {}
 
-const Register: React.FC<registerProps> = ({}) => {
+const Login: React.FC<registerProps> = ({}) => {
   const router = useRouter();
   const [, login] = useLoginMutation();
   const goToRegister = () => router.push('/register');
@@ -49,7 +51,7 @@ const Register: React.FC<registerProps> = ({}) => {
               login
             </Button>
 
-            <Button
+            {/* <Button
               mt={4}
               ml={2}
               onClick={goToRegister}
@@ -57,7 +59,7 @@ const Register: React.FC<registerProps> = ({}) => {
               isLoading={isSubmitting}
             >
               register
-            </Button>
+            </Button> */}
           </Form>
         )}
       </Formik>
@@ -65,4 +67,4 @@ const Register: React.FC<registerProps> = ({}) => {
   );
 };
 
-export default Register;
+export default withUrqlClient(createUrqlClient)(Login);
