@@ -13,7 +13,6 @@ interface registerProps {}
 const Login: React.FC<registerProps> = ({}) => {
   const router = useRouter();
   const [, login] = useLoginMutation();
-  const goToRegister = () => router.push('/register');
   return (
     <Wrapper variant="small">
       <Formik
@@ -23,7 +22,11 @@ const Login: React.FC<registerProps> = ({}) => {
           if (response.data?.login.errors) {
             setErrors(toErrorMap(response.data?.login.errors));
           } else if (response.data?.login.user) {
-            router.push('/');
+            if (typeof router.query.next === 'string') {
+              router.push(router.query.next);
+            } else {
+              router.push('/');
+            }
           }
         }}
       >
@@ -50,16 +53,6 @@ const Login: React.FC<registerProps> = ({}) => {
             >
               login
             </Button>
-
-            {/* <Button
-              mt={4}
-              ml={2}
-              onClick={goToRegister}
-              colorScheme="twitter"
-              isLoading={isSubmitting}
-            >
-              register
-            </Button> */}
           </Form>
         )}
       </Formik>
