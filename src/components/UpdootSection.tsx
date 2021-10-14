@@ -44,7 +44,7 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
           });
           setLoadingState('not-loading');
         }}
-        colorScheme={post.voteStatus === -1 ? 'teal' : undefined}
+        colorScheme={post.voteStatus === -1 ? 'red' : undefined}
         isLoading={loadingState === 'downdoot-loading'}
         aria-label="downdoot post"
         icon={<ChevronDownIcon />}
